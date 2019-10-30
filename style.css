@@ -1,0 +1,11 @@
+#footer {
+    background-color: blue;
+}
+
+#prefooter {
+    background-color: cadetblue;
+}
+
+#prefooter thead {
+    background-color: chartreuse;
+}
