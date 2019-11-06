@@ -70,6 +70,7 @@ function checkWinner() {
         // console.log(win.filter(function (item) {
         //     return player1.includes(item)
         // }))
+        // console.log(player1)
         // console.log(win)
     })
 }
