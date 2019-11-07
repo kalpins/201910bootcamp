@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>VueJS</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .manaKlase {
+            background-color: aqua;
+        }
+
+        .manaOtraKlase {
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-show="!buliens">{{title}}</h1>
+        <p>{{ hello }}</p>
+
+        <p>{{ hello }}</p>
+
+        <p>{{ hello }}</p>
+
+        <p>{{skaitlis}}</p>
+
+        <p>{{buliens}}</p>
+
+        <p>{{masivs}}</p>
+
+        <p>{{masivs[1]}}</p>
+
+        <p>{{mansObjekts[0].name}}</p>
+
+        <button @click="hello='Hello world!'">Change hello to english</button>
+
+        <p>{{manaFunkcija()}}</p>
+
+        <button @click="poga()">Poga</button>
+
+
+        <p>{{html}}</p>
+        <p v-text="html"></p>
+
+        <p v-html="html"></p>
+
+        <img v-bind:src="image.src" v-bind:alt="image.alt" :title="title">
+
+        <h2>{{input}}</h2>
+        <input type="text" v-model="input">
+
+        <button @click="piespied">piespied mani</button>
+
+        <input type="text" v-model="input" @keyup.enter="output" />
+
+        <button @click="a++">{{a}}</button>
+
+        <div :style="{width:width, height:height}" :class="{manaKlase: active, manaOtraKlase:!active}"></div>
+        <input type="text" v-model="width">
+        <input type="checkbox" v-model="active">
+
+        <input type="radio" v-model="active" :value="true">
+        <input type="radio" v-model="active" :value="false">
+
+        <select v-model="selection">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+        {{selection}}
+        {{compA}}
+    </div>
+    <p>{{ hello }}</p>
+</body>
+
+</html>
+
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            selection: "",
+            height: "100px",
+            width: "100px",
+            active: false,
+            a: 0,
+            input: "",
+            image: { alt: "Mans attels", src: "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081" },
+            title: "Mans virsraksts",
+            skaitlis: 6,
+            buliens: false,
+            hello: "Sveika Pasaule!",
+            masivs: ["!", "2", "#", 4],
+            mansObjekts: [
+                { name: "Rolands", age: 12 },
+                { name: "Oskars", age: 14 },
+                { name: "Peteris", age: 18, active: false }
+            ],
+            html: "<strong>text goes here</strong>"
+        },
+        methods: {
+            output: function () {
+                console.log("test");
+                alert(this.input);
+            },
+            piespied: function (event) {
+                console.log(event);
+            },
+            manaFunkcija: function () {
+                return "Hi, " + this.mansObjekts[0].name;
+            },
+            poga: function () {
+                this.mansObjekts[0].name = "Rolis";
+            },
+        },
+        computed: {
+            compA: function () {
+                if (this.a === 10) {
+                    this.a = 0
+                }
+                console.log("test");
+                return this.a
+            }
+        }
+    })
+</script>
