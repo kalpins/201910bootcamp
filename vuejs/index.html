@@ -68,13 +68,31 @@
         <input type="radio" v-model="active" :value="true">
         <input type="radio" v-model="active" :value="false">
 
-        <select v-model="selection">
+        <select v-if="active" v-model="selection">
             <option>Male</option>
             <option>Female</option>
             <option>Other</option>
         </select>
+        <div v-else>
+            <p>Make active to get gender</p>
+        </div>
+
+        <div v-if="selection === 'Other'">
+            <p>{{selection}}</p>
+        </div>
+        <div v-else-if="selection === 'Male'">
+            <p>Teksts</p>
+        </div>
+        <div v-else>Text</div>
         {{selection}}
         {{compA}}
+
+        <ul>
+            <li v-for="(objekts, index) in mansObjekts">
+                {{index}}. {{objekts.name}}
+                {{ index + ". " + objekts.name }}
+            </li>
+        </ul>
     </div>
     <p>{{ hello }}</p>
 </body>
