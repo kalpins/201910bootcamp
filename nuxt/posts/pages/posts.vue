@@ -5,6 +5,8 @@
         <v-card :to="`/post/${post.id}`">
           <v-card-title primary-title>{{post.title}}</v-card-title>
           <v-card-text>{{post.body}}</v-card-text>
+          <v-btn color="success" block text :to="`/post/edit/${post.id}`">Edit</v-btn>
+          <v-btn color="error" block text @click.prevent="deletePost(post.id, index)">Delete</v-btn>
         </v-card>
       </v-col>
     </v-row>
@@ -18,6 +20,17 @@ export default {
       "https://jsonplaceholder.typicode.com/posts"
     );
     return { posts: posts.data };
+  },
+  methods: {
+    deletePost(id, index) {
+      console.log("deletePost: " + id);
+      this.$axios
+        .delete("https://jsonplaceholder.typicode.com/posts/" + id)
+        .then(response => {
+          console.log(response);
+          this.posts.splice(index, 1);
+        });
+    }
   }
 };
 </script>
