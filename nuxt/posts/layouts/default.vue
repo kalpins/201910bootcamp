@@ -72,6 +72,11 @@ export default {
           icon: "mdi-chart-bubble",
           title: "Posts",
           to: "/posts"
+        },
+        {
+          icon: "mdi-plus-circle",
+          title: "Create a post",
+          to: "/post/create"
         }
       ],
       miniVariant: false,
