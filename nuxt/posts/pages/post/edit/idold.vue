@@ -27,21 +27,18 @@
 
 <script>
 export default {
-  data() {
+  async asyncData({ params, app }) {
+    const response = await app.$axios.get(
+      `https://jsonplaceholder.typicode.com/posts/${params.id}`
+    );
     return {
-      title: "",
-      body: "",
-      userId: 1
+      title: response.data.title,
+      body: response.data.body,
+      userId: response.data.userId,
+      id: response.data.id
     };
   },
   methods: {
-    getTodos: function() {
-      this.$axios
-        .get("https://jsonplaceholder.typicode.com/todos")
-        .then(
-          response => ((this.todos = response.data), console.log(this.todos))
-        );
-    },
     createPost: function() {
       console.log("Posted");
       // console.log(this.title);
@@ -51,12 +48,16 @@ export default {
       if (this.title.length < 6) {
         console.log("ERROR");
         return;
+
+        //veeValidate
       }
 
       this.$axios
-        .post("https://jsonplaceholder.typicode.com/post", {
+        .put(`https://jsonplaceholder.typicode.com/posts/${this.id}`, {
+          id: this.id,
           title: this.title,
-          body: this.body
+          body: this.body,
+          userId: this.userId
         })
         .then(response => console.log(response))
         .catch(e => console.log(e.response))
@@ -67,4 +68,23 @@ export default {
 </script>
 
 <style>
+/* algoritms */
+/* 1) iegūt post no id kas ir parametrā (skatīt kā lapu post/_id.vue)
+2) izveidot formu (skatīt post/create.vue)
+3) iegūtos datus saglabāt mainīgajos un ievadīt formā
+4) izmantot this.$axios.put(...) */
+/*
+retrun {post:response.data}
+
+return {title:response.data.title, body:response.data.body ...}
+
+
+retrun {post:response.data}
+v-model="post.title"
+title:this.post.title
+
+"posts/" +this.post.id
+
+`posts/${this.post.id}` */
 </style>
+
